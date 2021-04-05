@@ -1,19 +1,19 @@
-# Apply updates
+# Executar updates
 #
 zypper -n dup -y
 
-# Disable swap - generally recommendeded for K8s
+# Desabilitar Swap
 #
 swapoff -a
 sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
 
-# Reset the machine-id value. This has known to cause issues with DHCP
+# Resetar o valor de machine-id
 #
 truncate -s 0 /etc/machine-id
 rm /var/lib/dbus/machine-id
 ln -s /etc/machine-id /var/lib/dbus/machine-id
 
-# Cleanup
+# Limpeza
 #
 zypper -n clean --all
 rm -f /etc/udev/rules.d/70-persistent-net.rules
